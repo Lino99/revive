@@ -2,6 +2,7 @@ FROM linuxconfig/lemp
 MAINTAINER CoGe <xbian99@gmail.com>
 
 # Install prerequisites 
+RUN apt-get update
 RUN apt-get install -y wget
 
 # Download Revive ad server 
