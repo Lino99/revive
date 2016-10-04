@@ -3,7 +3,7 @@ MAINTAINER CoGe <xbian99@gmail.com>
 
 # Install prerequisites 
 RUN apt-get update
-RUN apt-get install -y wget
+RUN apt-get install -y --no-install-recommends wget
 
 # Download Revive ad server 
 RUN rm -fr /var/www/html/*
