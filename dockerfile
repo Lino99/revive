@@ -8,7 +8,7 @@ RUN apt-get install -y --no-install-recommends wget
 
 # Download Revive ad server 
 RUN rm -fr /var/www/html/*
-RUN cd /var/www/html/; wget -q -O- https://download.revive-adserver.com/revive-adserver-4.0.0.tar.gz | tar xz --strip 1 
+RUN wget -q -O- https://download.revive-adserver.com/revive-adserver-4.0.0.tar.gz | tar xz --strip 1 
 
 # Create database
 RUN service mysql start; mysqladmin -uadmin -ppass create revive
