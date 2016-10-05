@@ -6,6 +6,7 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends wget
 
 # Download Revive ad server 
+RUN mdir /var/www/html
 RUN rm -fr /var/www/html/*
 RUN cd /var/www/html/; wget -q -O- https://download.revive-adserver.com/revive-adserver-4.0.0.zip | tar xz --strip 1 
 
