@@ -3,7 +3,7 @@
 #
 
 FROM alpine
-MAINTAINER kev <xbian99@gmail.com>
+MAINTAINER kev <noreply@easypi.info>
 
 WORKDIR /var/www/html
 
@@ -21,7 +21,7 @@ RUN apk add -U gzip \
                php-xml \
                php-zlib \
                tar \
-    && wget -O- http://download.revive-adserver.com/revive-adserver-4.0.0.tar.gz | tar xz --strip 1 \
+    && wget -O- http://download.revive-adserver.com/revive-adserver-3.2.1.tar.gz | tar xz --strip 1 \
     && chown -R nobody:nobody . \
     && rm -rf /var/cache/apk/*
 
