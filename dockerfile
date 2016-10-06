@@ -1,14 +1,17 @@
 FROM ubuntu:xenial
+
+MAINTAINER CoGe <xbian99@gmail.com>
+
 RUN \
  apt-get update && \
  apt-get install -yq \
   apache2 \
-  libapache2-mod-php5 \
+  libapache2-mod-php \
   mysql-server \
-  php5-mysql \
+  php-mysql \
   pwgen \
   php-apc \
-  php5-mcrypt \
+  php-mcrypt \
   unzip \
  && \
  rm -rf /var/lib/apt/lists/* && \
