@@ -10,7 +10,6 @@ RUN \
   mysql-server \
   php-mysql \
   pwgen \
-  php-apc \
   php-mcrypt \
   unzip \
  && \
