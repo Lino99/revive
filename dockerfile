@@ -1,36 +1,20 @@
-FROM linuxconfig/nginx
-MAINTAINER Lubos Rendek <web@linuxconfig.org>
+FROM linuxconfig/lamp
+MAINTAINER CoGe <xbian99@gmail.com>
 
-ENV DEBIAN_FRONTEND noninteractive
+# Install prerequisites 
+RUN apt-get install -y wget
 
-# Main package installation
-RUN apt-get update
-RUN apt-get -y install supervisor php5-cgi mysql-server php5-mysql 
+# Download Revive ad server 
+RUN rm -fr /var/www/html/*
+RUN cd /var/www/html/; wget -q -O- https://download.revive-adserver.com/revive-adserver-3.2.4.tar.gz | tar xz --strip 1 
 
-# Extra package installation
-RUN apt-get -y install php5-gd php-apc php5-mcrypt
+# Create database
+RUN service mysql start; mysqladmin -uadmin -ppass create revive
 
-# Nginx configuration
-ADD default /etc/nginx/sites-available/
+# Update file ownership
+RUN chown -R www-data.www-data /var/www/html
 
-# PHP FastCGI script
-ADD php-fcgi /usr/local/sbin/
-RUN chmod o+x /usr/local/sbin/php-fcgi
-
-# Supervisor configuration files
-ADD supervisord.conf /etc/supervisor/
-ADD supervisor-lemp.conf /etc/supervisor/conf.d/
-
-# Basic PHP website
-ADD index.php /var/www/html/
-
-
-# Create new MySQL admin user
-RUN service mysql start; mysql -u root -e "CREATE USER 'admin'@'%' IDENTIFIED BY 'pass';";mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;";
-
-# MySQL configuration
-RUN sed -i 's/bind-address/#bind-address/' /etc/mysql/my.cnf
-
-EXPOSE 80 3306
+# Allow ports
+EXPOSE 80
 
 CMD ["supervisord"]
