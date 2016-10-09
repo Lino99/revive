@@ -5,7 +5,7 @@ MAINTAINER CoGe <xbian99@gmail.com>
 RUN \
  apt-get update && \
  apt-get install -y wget && \
- apt-get upgrade -y \
+ apt-get upgrade -y && \
  rm -rf /var/lib/apt/lists/*
 
 # Download Revive ad server 
